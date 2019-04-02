@@ -1,2 +1,22 @@
-script: exit 0
+os: windows
 
+language: node_js
+
+node_js:
+- '10'
+
+install:
+  - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
+  - choco install iisexpress
+  - cd C:\ProgramData\\Microsoft
+  - dir
+  - cd C:\ProgramData\\chocolatey\\lib\\iisexpress\\tools
+  - dir
+  - where /r C:\ProgramData *.exe
+  
+script:
+  - iisexpress.exe
+  # - cd e2e-tests
+  # - npm install
+  # - npm run pretest
+  # - iisexpress /path:C:\Users\travis\build\okta\samples-aspnet-webforms\okta-hosted-login\dist\okta-aspnet-webforms-example
